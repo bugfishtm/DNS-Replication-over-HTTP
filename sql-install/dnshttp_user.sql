@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `dnshttp_user` (
 -- Dumping data for table kiedel.dnshttp_user: ~0 rows (approximately)
 /*!40000 ALTER TABLE `dnshttp_user` DISABLE KEYS */;
 INSERT INTO `dnshttp_user` (`id`, `user_name`, `user_pass`, `user_mail`, `user_mail_shadow`, `user_rank`, `created_date`, `modify_date`, `reset_date`, `activation_date`, `mail_change_date`, `last_login`, `is_confirmed`, `is_blocked`, `section`) VALUES
-	(2, 'admin', '$2y$10$VeEPlmjbnINx444mUpVppuWLFgFSW5dSKe4kFdnBV28I19p2imSQq', 'undefined', NULL, 0, '2022-11-24 00:09:38', '2022-11-24 00:10:23', NULL, NULL, NULL, NULL, 1, 0, NULL);
+	(2, 'admin', '$2y$10$TWwkHDDET45kMU6Az/WChu6CoVcIIIhWARF/Ylk3GIDeGnXtXine6', 'undefined', NULL, 0, '2022-11-24 00:09:38', '2022-11-24 00:10:23', NULL, NULL, NULL, NULL, 1, 0, NULL);
 /*!40000 ALTER TABLE `dnshttp_user` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

@@ -7,8 +7,7 @@
 		 |______  /____/\___  /|__|  |__/____  >___|  /
 				\/     /_____/               \/     \/  Default Forwarding File for Hidden Areas*/
 	require_once("../settings.php");
-	$result = $mysql->select("SELECT * FROM "._TABLE_DOMAIN_." WHERE type LIKE '%dns%' ORDER BY creation DESC", false);
-	if(is_array($result)) {
-		echo $result["creation"];
-	}
+	if(is_numeric(dnshttp_api_token_relay($mysql, @$_POST["token"]))) { 
+	echo "online"; } else { echo "tokenerror"; }
+	exit();
 ?>

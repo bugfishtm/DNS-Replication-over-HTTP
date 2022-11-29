@@ -50,26 +50,10 @@ require_once("./templates/template_header.php"); ?>
 	<fieldset>
 		<legend>Cronjob Settings</legend>
 		<?php
-			if(_CRON_MODE_  == 1) { $tmp = "["._CRON_MODE_."]"._CRON_MODE_1_PATH_; } else { $tmp = "Error!"; }
-			if(_CRON_MODE_  == 2) { $tmp = "["._CRON_MODE_."]". _CRON_MODE_2_PATH_; } 
-			echo 'Cron Order: <b>'. @_CRON_ARRAY_[0].", ".@_CRON_ARRAY_[1].", ".@_CRON_ARRAY_[2].'</b><br />';
-			echo 'Cron Mode and Path: <b>'.$tmp.'</b><br />';
-			if(_CRON_CLEANUP_  == true) { $tmp = "Yes"; } else { $tmp = "No"; }
-			echo 'Cleanup DNS Domains on Refresh: <b>'.$tmp.'</b><br />';
-			if(_CRON_DOMAIN_AS_RELAY_  == true) { $tmp = "Yes"; } else { $tmp = "No"; }
-			echo '<br />Domain as Relay: <b>'.$tmp.'</b><br />';
-			echo 'Port: <b>'._CRON_DOMAIN_AS_RELAY_PORT_.'</b><br />';
-			echo 'Protocol: <b>'._CRON_DOMAIN_AS_RELAY_PROT_.'</b><br />';
 			
-			if(_CRON_SUB_AS_RELAY_  == true) { $tmp = "Yes"; } else { $tmp = "No"; }
-			echo '<br />Domain Sub as Relay: <b>'.$tmp.'</b><br />';
-			echo 'Subdomain Extension: <b>'._CRON_SUB_AS_RELAY_SUB_.'</b><br />';
-			echo 'Port: <b>'._CRON_SUB_AS_RELAY_PORT_.'</b><br />';
-			echo 'Protocol: <b>'._CRON_SUB_AS_RELAY_PROT_.'</b><br />';
-			
-			if(_CRON_TXT_TO_RELAY_  == true) { $tmp = "Yes"; } else { $tmp = "No"; }
-			echo '<br />Domain TXT as Relay: <b>'.$tmp.'</b><br />';
-			echo 'Domain TXT Identifier: <b>'._CRON_TXT_TO_RELAY_STRING_.'</b><br />';
+			echo 'Bind Lib Folder: <b>'._CRON_BIND_LIB_.'</b><br />';
+			echo 'Bind Cache Folder: <b>'._CRON_BIND_CACHE_.'</b><br />';
+			echo 'Named File for Domains: <b>'._CRON_BIND_FILE_.'</b><br />';
 		?>
 	</fieldset>
 

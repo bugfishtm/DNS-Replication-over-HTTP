@@ -12,25 +12,21 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
--- Dumping structure for table kiedel.dnshttp_domain
-CREATE TABLE IF NOT EXISTS `dnshttp_domain` (
+-- Dumping structure for table kiedel.dnshttp_api_domain
+CREATE TABLE IF NOT EXISTS `dnshttp_api_domain` (
   `id` int NOT NULL AUTO_INCREMENT COMMENT 'Unique ID',
   `domain` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Domain Name',
-  `fk_relay` int DEFAULT NULL COMMENT 'Related Relay',
-  `fk_user` int DEFAULT NULL COMMENT 'Related User',
-  `type` varchar(12) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'usr | dns-dom | dns-txt | dns-sub',
-  `ovr_servername` varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Override Server Name',
-  `ovr_serverport` int DEFAULT NULL COMMENT 'Override Server Port',
-  `ovr_smtps` tinyint(1) DEFAULT NULL COMMENT '0 - SMTP | 1 - SMTPS',
+  `content` TEXT DEFAULT NULL COMMENT 'Domain Content',
+  `fk_server` int DEFAULT NULL COMMENT 'Related Relay',
   `creation` datetime DEFAULT CURRENT_TIMESTAMP COMMENT 'Creation Date',
   `modification` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Modification Date',
   PRIMARY KEY (`id`),
   UNIQUE KEY `domain` (`domain`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1243 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table kiedel.dnshttp_domain: ~0 rows (approximately)
-/*!40000 ALTER TABLE `dnshttp_domain` DISABLE KEYS */;
-/*!40000 ALTER TABLE `dnshttp_domain` ENABLE KEYS */;
+-- Dumping data for table kiedel.dnshttp_api_domain: ~0 rows (approximately)
+/*!40000 ALTER TABLE `dnshttp_api_domain` DISABLE KEYS */;
+/*!40000 ALTER TABLE `dnshttp_api_domain` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;

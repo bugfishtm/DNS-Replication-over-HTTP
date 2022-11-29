@@ -27,12 +27,12 @@
 	} 
 					
 	require_once("./templates/template_header.php"); ?>
-	<div class="content_box">
+	<div class="content_box small_box vcenter">
 		<form method="post">
 			<input type="hidden"	name="csrf"			value="<?php echo $csrf->get(); ?>">
-			<input type="text" 		name="username" 	placeholder="us3rn4me" >
-			<input type="password"  name="password" 	placeholder="p3ssw0rd">
-			<img src="./captcha/captcha_login.php"><input type="text"  name="captcha" 	placeholder="c4ptcha">
+			<input type="text" 		name="username" 	placeholder="Username" >
+			<input type="password"  name="password" 	placeholder="Password">
+			<img src="./captcha/captcha_login.php"><input type="text"  name="captcha" 	placeholder="Captcha">
 			<input type="submit" 	value="Authenticate" name="auth" class="primary_button">
 		</form>
 	</div>

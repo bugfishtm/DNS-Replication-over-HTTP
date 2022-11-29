@@ -8,7 +8,7 @@
 				\/     /_____/               \/     \/  Navigation File */
 				if($user->user_loggedIn) { ?>
 <div id="nav">
-	<?php if($user->user_rank == 0) {  echo "Admin: "; ?>
+	<?php if($permsobj->hasPerm($user->user_id, "perm_admin") OR $user->user_rank == 0) {  echo "Admin: "; ?>
 		<?php if($permsobj->hasPerm($user->user_id, "perm_admin") OR $user->user_rank == 0) { ?> <a href="./?site=users" <?php if(@$_GET["site"] == "users") { echo 'id="nav_active"'; } ?>>Users</a> <?php } ?> 
 		<?php if($permsobj->hasPerm($user->user_id, "perm_admin")  OR $user->user_rank == 0) { ?> <a href="./?site=status" <?php if(@$_GET["site"] == "status") { echo 'id="nav_active"'; } ?>>Status</a> <?php } ?> 
 		<?php if($permsobj->hasPerm($user->user_id, "perm_admin")  OR $user->user_rank == 0) { ?> <a href="./?site=blocks" <?php if(@$_GET["site"] == "blocks") { echo 'id="nav_active"'; } ?>>Blacklist(Login)</a><?php } ?> 

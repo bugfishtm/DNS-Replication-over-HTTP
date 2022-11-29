@@ -5,7 +5,7 @@
 		 |    |  _/  |  \/ ___\   __\|  |/  ___/  |  \ 
 		 |    |   \  |  / /_/  >  |  |  |\___ \|   Y  \
 		 |______  /____/\___  /|__|  |__/____  >___|  /
-				\/     /_____/               \/     \/  Default Forwarding File for Hidden Areas */
+				\/     /_____/               \/     \/  Default Forwarding File for Hidden Areas*/
 	Header("Location: ../");
 	exit();
 ?>
