@@ -41,6 +41,7 @@
 		define('_TABLE_DOMAIN_BINDED_',			_TABLE_PREFIX_."binded_domain");
 		define('_TABLE_DOMAIN_API_',			_TABLE_PREFIX_."api_domain");
 		define('_TABLE_SERVER_',				_TABLE_PREFIX_."server");
+		define('_TABLE_CONFLICT_',				_TABLE_PREFIX_."conflict");
 		define('_TABLE_IPBL_',					_TABLE_PREFIX_."ipblacklist");
 		define('_TABLE_PERM_',					_TABLE_PREFIX_."perms");
 		

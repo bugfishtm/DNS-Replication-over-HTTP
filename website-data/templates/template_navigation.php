@@ -18,6 +18,7 @@
 	<a href="./?site=binddomains" <?php if(@$_GET["site"] == "binddomains") { echo 'id="nav_active"'; } ?>>Bind-Domains</a> 
 	<a href="./?site=apidomains" <?php if(@$_GET["site"] == "apidomains") { echo 'id="nav_active"'; } ?>>API-Domains</a> 
 	<a href="./?site=server" <?php if(@$_GET["site"] == "server") { echo 'id="nav_active"'; } ?>>Server</a>
+	<a href="./?site=conflict" <?php if(@$_GET["site"] == "conflict") { echo 'id="nav_active"'; } ?>>Conflicts</a>
 	<a href="./?site=profile" <?php if(@$_GET["site"] == "profile") { echo 'id="nav_active"'; } ?>>Profile</a>  
 	<a href="./?site=logout">Logout</a>		
 </div>	

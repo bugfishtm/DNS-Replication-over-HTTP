@@ -9,12 +9,14 @@
 			// Write the dnshttp.conf.local FILE
 				$conf_buildstring = "";
 				foreach($domains as $key => $value) {
+					$relay = dnshttp_server_get($mysql, $value["fk_server"]);
+					var_dump($value["fk_server"]);
 					$conf_buildstring .= '
 
 zone "'.$value["domain"].'" {
 	type slave;
-	masters { 127.0.0.1; };
-	allow-transfer { 127.0.0.1; };
+	masters {'.$relay["ip"].'; };
+	allow-transfer { '.$relay["ip"].'; };
 	file "'._CRON_BIND_LIB_.$value["domain"].'.hosts";
 };	
 

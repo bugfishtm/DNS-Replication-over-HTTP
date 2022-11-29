@@ -73,8 +73,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' AND isset($_POST["exec_pw"])) {
 		<div class="internal_popup_inner">
 			<div class="internal_popup_title"><?php echo $title; ?></div>		
 			<form method="post" action="./?site=users"><div class="internal_popup_content">			
-		<?php if(@$_GET["edit"] == "add") { ?>		<input type="text" placeholder="Hostname" name="username" > <?php  ?>
-		<?php } else { ?>		<input type="text" placeholder="Hostname" name="username" value="<?php echo $user->getInfo($_GET["edit"])["user_name"]; ?>"> <?php } ?>
+		<?php if(@$_GET["edit"] == "add") { ?>		<input type="text" placeholder="Username" name="username" > <?php  ?>
+		<?php } else { ?>		<input type="text" placeholder="Username" name="username" value="<?php echo $user->getInfo($_GET["edit"])["user_name"]; ?>"> <?php } ?>
 		<?php if(@$_GET["edit"] == "add") { ?> <input type="password" placeholder="Password" name="password"> <?php } ?>
 				<div style="float:left">
 				<?php if($user->getInfo($_GET["edit"])["user_rank"] != 0 OR @$_GET["edit"] == "add") { $curid = $user->getInfo($_GET["edit"])["id"]; ?>		

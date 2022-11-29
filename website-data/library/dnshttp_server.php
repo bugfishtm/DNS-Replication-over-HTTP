@@ -14,20 +14,13 @@
 		} return false; 
 	}	
 	
+	// Check SMTP Connection to a Server
  	function dnshttp_server_check($host, $port) {$f = @fsockopen($host, $port, $errno, $errstr, 1);if ($f !== false) {$res = fread($f, 1024) ;if (strlen($res) > 0 && strpos($res,'220') === 0){@fclose($f);return true;}else{@fclose($f);return false;}} return false;}
-	
-	function dnshttp_server_name_exists($mysql, $domain_name) { 
-		if(trim($domain_name) != "") { 
-			$query = mysqli_query($mysql->mysqlcon, "SELECT * FROM "._TABLE_USERS_." WHERE id = \"".$mysql->escape($domain_name)."\"");
-		while ($result	=	mysqli_fetch_array($query) ) { return $result["user"]; } 
-		
-		} return false; 
-	}	
 	
 	// Get all Informations of a Domain
 	function dnshttp_server_get($mysql, $id) {
 		if(is_numeric($id)) { 
-			$query = mysqli_query($mysql->mysqlcon, "SELECT * FROM "._TABLE_SERVER_." WHERE id = \"".$mysql->escape($id)."\"");
+			$query = mysqli_query($mysql->mysqlcon, "SELECT * FROM "._TABLE_SERVER_." WHERE id = $id");
 			while ($result	=	mysqli_fetch_array($query) ) { return $result; } 
 		} return false; 		
 	}

@@ -22,6 +22,7 @@
 			case "blocks": define("_INIT_TITLE_", "IP-Blacklist | DNSHTTP"); require_once("./sections/blocks.php"); break;
 			case "server": define("_INIT_TITLE_", "Server | DNSHTTP"); require_once("./sections/server.php"); break;
 			case "users": define("_INIT_TITLE_", "Users | DNSHTTP"); require_once("./sections/users.php"); break;
+			case "conflict": define("_INIT_TITLE_", "Conflicts | DNSHTTP"); require_once("./sections/conflict.php"); break;
 			case "status": define("_INIT_TITLE_", "Status | DNSHTTP"); require_once("./sections/status.php"); break;
 			case "profile": define("_INIT_TITLE_", "Profile | DNSHTTP"); require_once("./sections/profile.php"); break;
 			default: Header("Location: ./?site=binddomains"); exit();				

@@ -1,20 +1,24 @@
 <?php
-if(isset($_POST["exec_edit"]) AND trim(@$_POST["path"]) != "" AND trim(@$_POST["token"]) != "") {
-	if(is_numeric(@$_POST["exec_ref"])) {
-		$mysql->query("UPDATE "._TABLE_SERVER_." SET api_path = '".$mysql->escape(trim($_POST["path"]))."' WHERE id = \"".$_POST["exec_ref"]."\";");
-		$mysql->query("UPDATE "._TABLE_SERVER_." SET api_token = '".$mysql->escape(trim($_POST["token"]))."' WHERE id = \"".$_POST["exec_ref"]."\";");
-		if($_POST["master"]) { $master = 1; } else  { $master = 0 ;}
-		$mysql->query("UPDATE "._TABLE_SERVER_." SET server_type = '".$master."' WHERE id = \"".$_POST["exec_ref"]."\";");
-		x_eventBoxPrep("Relay has been updated!", "ok", _COOKIES_);	
-	} else {											
-		if($_POST["master"]) { $master = 1; } else  { $master = 0 ;}
-		$mysql->query("INSERT INTO "._TABLE_SERVER_." (api_path, api_token, server_type, fk_user) 
-													VALUES (\"".$mysql->escape(trim($_POST["path"]))."\"
-													, '".$mysql->escape(trim($_POST["token"]))."'
-													, '".$master."'
-													, '".$user->user_id."');");
-		x_eventBoxPrep("Relay has been added!", "ok", _COOKIES_);
-	}
+if(isset($_POST["exec_edit"])) {
+	if(trim(@$_POST["path"]) != "" AND trim(@$_POST["token"]) != "" AND trim(@$_POST["ip"]) != "") {
+		if(is_numeric(@$_POST["exec_ref"])) {
+			$mysql->query("UPDATE "._TABLE_SERVER_." SET api_path = '".$mysql->escape(trim($_POST["path"]))."' WHERE id = \"".$_POST["exec_ref"]."\";");
+			$mysql->query("UPDATE "._TABLE_SERVER_." SET api_token = '".$mysql->escape(trim($_POST["token"]))."' WHERE id = \"".$_POST["exec_ref"]."\";");
+			$mysql->query("UPDATE "._TABLE_SERVER_." SET ip = '".$mysql->escape(trim($_POST["ip"]))."' WHERE id = \"".$_POST["exec_ref"]."\";");
+			if($_POST["master"]) { $master = 1; } else  { $master = 0 ;}
+			$mysql->query("UPDATE "._TABLE_SERVER_." SET server_type = '".$master."' WHERE id = \"".$_POST["exec_ref"]."\";");
+			x_eventBoxPrep("Relay has been updated!", "ok", _COOKIES_);	
+		} else {											
+			if($_POST["master"]) { $master = 1; } else  { $master = 0 ;}
+			$mysql->query("INSERT INTO "._TABLE_SERVER_." (api_path, api_token, server_type, fk_user, ip) 
+														VALUES (\"".$mysql->escape(trim($_POST["path"]))."\"
+														, '".$mysql->escape(trim($_POST["token"]))."'
+														, '".$master."'
+														, '".$user->user_id."'
+														, '".$user->user_id."');");
+			x_eventBoxPrep("Relay has been added!", "ok", _COOKIES_);
+		}
+	} else { x_eventBoxPrep("Error in submitted data!", "error", _COOKIES_);  }
 }
 
 if(isset($_POST["exec_del"]) AND dnshttp_server_id_exists($mysql, @$_POST["exec_ref"])) {
@@ -40,6 +44,7 @@ if(isset($_POST["exec_del"]) AND dnshttp_server_id_exists($mysql, @$_POST["exec_
 				echo "<div style='width: 60%;float:left;'>";
 					echo "<b>Path: ".@$curissuer["api_path"]."</b><br />";
 					echo "Token: ".@$curissuer["api_token"]."<br />";
+					echo "IP: ".@$curissuer["ip"]."<br />";
 					echo "Type: ".@$server_type."<br />";
 					echo "Owner: ".dnshttp_user_get_name_from_id($mysql, @$curissuer["fk_user"])."<br />";
 				echo "</div>";	
@@ -65,6 +70,7 @@ if(isset($_POST["exec_del"]) AND dnshttp_server_id_exists($mysql, @$_POST["exec_
 			<form method="post" action="./?site=server"><div class="internal_popup_content">			
 				<input type="text" placeholder="Api-Path" name="path" value="<?php echo dnshttp_server_get($mysql, $_GET["edit"])["api_path"]; ?>">
 				<input type="text" placeholder="Api-Token" name="token" value="<?php echo dnshttp_server_get($mysql, $_GET["edit"])["api_token"]; ?>">
+				<input type="text" placeholder="Server-IP" name="ip" value="<?php echo dnshttp_server_get($mysql, $_GET["edit"])["ip"]; ?>">
 				<input type="checkbox" name="slave" <?php if(dnshttp_server_get($mysql, $_GET["edit"])["server_type"] != 1) { echo "checked"; } ?>>Slave DNS-Server
 				<input type="checkbox" name="master" <?php if(dnshttp_server_get($mysql, $_GET["edit"])["server_type"] == 1) { echo "checked"; } ?>>Master DNS-Server
 				<?php if(is_numeric(@$_GET["edit"])) { ?><input type="hidden" value="<?php echo @$_GET["edit"]; ?>" name="exec_ref"><?php } ?>

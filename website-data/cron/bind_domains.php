@@ -59,7 +59,7 @@
 								array_push($all_domains,trim($domain) );
 								if($x = dnshttp_bind_domain_name_exists($mysql, trim($domain))) {
 									$gg = fopen(_CRON_BIND_LIB_. trim($domain) .'.hosts', 'r') or die("File for $domain not found! \r\n");
-									$readtext = fread($gg, 3000);
+									$readtext = fread($gg, filesize(_CRON_BIND_LIB_. trim($domain) .'.hosts'));
 									$bind[0]["type"] = "s";
 									$bind[0]["value"] = $readtext;
 									$mysql->query("UPDATE "._TABLE_DOMAIN_BIND_." SET content = ?, modification = CURRENT_TIMESTAMP() WHERE id = '".$x."';", $bind);	
