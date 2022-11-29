@@ -70,7 +70,7 @@ Resets the IP Blacklist for Login - This is an Anti BruteForce Feature
 ### Bind 9 named.conf.options Config Example
 
 	options {
-		directory "/var/cache/bind";
+		directory "/var/lib/bind";
 	    dnssec-validation auto;
 	    listen-on-v6 { any; };
 	    version "None Available";
