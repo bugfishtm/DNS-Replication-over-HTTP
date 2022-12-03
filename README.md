@@ -41,32 +41,32 @@ Resets the IP Blacklist for Login - This is an Anti BruteForce Feature
 -> PHP Modules: curl, intl, gd
 
 ##  Configure a Slave/Master Connection
-- Enter the Slave Server in Panel on Master Server with token "123"
-- Enter Master Server in Slave Server with SAME token used on Master Server 
-- Domains will be fetched from Master locally, than delivered to the Slave Server in intervalls you can setup by editing the cronjob execution intervalls. API-Token is the Token which needs to be the Same inside a Master/Slave Connection. API-Path is the Path to this Script installed on an External server. For example https://domain OR http://domain/dnsscriptsubfolder
+- Enter the Slave Server in Panel on Master Server with token "123"  
+- Enter Master Server in Slave Server with SAME token used on Master Server   
+- Domains will be fetched from Master locally, than delivered to the Slave Server in intervalls you can setup by editing the cronjob execution intervalls. API-Token is the Token which needs to be the Same inside a Master/Slave Connection. API-Path is the Path to this Script installed on an External server. For example https://domain OR http://domain/dnsscriptsubfolder  
 
 ##  Configuration Files
 
 ### Configuration File Parameters
-#### Default Site Runtime Parameters
-\_TITLE\_ - Title for Page to be recognizes in Cronjobs or misc.
-\_COOKIES\_ - Pre-String for Cookies to run multiple Instances
-\_MAIN_PATH\_ - Document Root Where the Website is Located
+#### Default Site Runtime Parameters  
+\_TITLE\_ - Title for Page to be recognizes in Cronjobs or misc.  
+\_COOKIES\_ - Pre-String for Cookies to run multiple Instances  
+\_MAIN_PATH\_ - Document Root Where the Website is Located  
 #### Mysql Parameters
-\_SQL_HOST\_- MySQL Server Host
-\_SQL_USER\_ - MySQL Server Username
-\_SQL_PASS\_ - MySQL Server Password
-\_SQL_DB\_ - MySQL Server Database
+\_SQL_HOST\_- MySQL Server Host  
+\_SQL_USER\_ - MySQL Server Username  
+\_SQL_PASS\_ - MySQL Server Password  
+\_SQL_DB\_ - MySQL Server Database  
 #### Security Parameters
-\_LOGIN_SESSION_BLOCK_LIMIT\_  - Login Session Ban Fail Limit
-\_IP_BLACKLIST_DAILY_OP_LIMIT\_ - Login IP Ban Limit for Fails
-\_CSRF_VALID_LIMIT_TIME\_ - Set Valid Time in Seconds for CSRF
+\_LOGIN_SESSION_BLOCK_LIMIT\_  - Login Session Ban Fail Limit  
+\_IP_BLACKLIST_DAILY_OP_LIMIT\_ - Login IP Ban Limit for Fails  
+\_CSRF_VALID_LIMIT_TIME\_ - Set Valid Time in Seconds for CSRF  
 #### BIND Parameters
-\_CRON_BIND_LIB\_ - Library Path where Bind Domain Files are Stored
-\_CRON_BIND_CACHE\_ - Library Path where Bind Domain Cache Files are Stored
-\__CRON_BIND_FILE_DNSHTTP\_ - DNS HTTP Bind File
-\_CRON_BIND_FILE\_ - 1 =  named.conf file Location
-
+\_CRON_BIND_LIB\_ - Library Path where Bind Domain Files are Stored  
+\_CRON_BIND_CACHE\_ - Library Path where Bind Domain Cache Files are Stored  
+\__CRON_BIND_FILE_DNSHTTP\_ - DNS HTTP Bind File  
+\_CRON_BIND_FILE\_ - 1 =  named.conf file Location  
+  
 ### Bind 9 named.conf.options Config Example
 
 	options {
