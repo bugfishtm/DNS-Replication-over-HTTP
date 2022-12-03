@@ -37,8 +37,8 @@ blacklist_reset [Every Day]
 Resets the IP Blacklist for Login - This is an Anti BruteForce Feature
 
 ## Requirements  
--> Apache2 with PHP7.4 [PHP 8 untested]
--> PHP Modules: curl, intl, gd
+-> Apache2 with PHP7.4 [PHP 8 untested]  
+-> PHP Modules: curl, intl, gd  
 
 ##  Configure a Slave/Master Connection
 - Enter the Slave Server in Panel on Master Server with token "123"  
