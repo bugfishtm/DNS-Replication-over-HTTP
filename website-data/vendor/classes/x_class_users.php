@@ -64,7 +64,7 @@
 			
 		// Session Ban Functions
 			private $sessionban_limit = false;
-			public function isBanned() {if(is_numeric($this->sessionban_limit)){if($_SESSION[$this->cookies_pre."x_users_sec"] > $this->sessionban_limit){return true;} else{return false;}} else {return false;}}
+			public function isBanned() {if(is_numeric($this->sessionban_limit)){if(@!is_numeric($_SESSION[$this->cookies_pre."x_users_sec"])){$_SESSION[$this->cookies_pre."x_users_sec"] = 0;} if(@$_SESSION[$this->cookies_pre."x_users_sec"] > $this->sessionban_limit){return true;} else{return false;}} else {return false;}}
 			public function sessionban_limit($int = 50) {$this->sessionban_limit = $int;}
 			public function resetFailure() {$_SESSION[$this->cookies_pre."x_users_sec"] = 0;} 
 			public function raiseFailure(){if(is_numeric($this->sessionban_limit)) {if(@!is_numeric($_SESSION[$this->cookies_pre."x_users_sec"])){$_SESSION[$this->cookies_pre."x_users_sec"] = 0;} $_SESSION[$this->cookies_pre."x_users_sec"] = $_SESSION[$this->cookies_pre."x_users_sec"] + 1;} else {$this->resetFailure();}} 				
@@ -221,11 +221,11 @@
 				setcookie($this->cookies_pre."session_key", $sessionkey, time() + $this->cookies_use_expire_d * 24 * 60 * 60);}}	
 			private function cookie_delete() { if($this->cookies_use) { unset($_COOKIE[$this->cookies_pre.'session_key']); @setcookie($this->cookies_pre.'session_key', '', time() - 3600, '/'); 
 				unset($_COOKIE[$this->cookies_pre.'session_userid']); @setcookie($this->cookies_pre.'session_userid', '', time() - 3600, '/');}}
-			private function cookie_restore_session() { if($this->cookies_use AND !$this->user_loggedIn) {
+			private function cookie_restore_session() { if($this->cookies_use AND !$this->user_loggedIn) { 
 				if(isset($_COOKIE[$this->cookies_pre."session_userid"]) AND isset($_COOKIE[$this->cookies_pre."session_key"])) {
 					if($this->session_valid($_COOKIE[$this->cookies_pre."session_key"], $_COOKIE[$this->cookies_pre."session_userid"])) {
-						$_SESSION[$this->cookies_pre."x_users_key"];
-						$_SESSION[$this->cookies_pre."x_users_id"];
+						$_SESSION[$this->cookies_pre."x_users_key"] = @$_COOKIE[$this->cookies_pre."session_key"];
+						$_SESSION[$this->cookies_pre."x_users_id"] = @$_COOKIE[$this->cookies_pre."session_userid"];
 						$_SESSION[$this->cookies_pre."x_users_ip"]  = @$_SERVER["REMOTE_ADDR"];
 						$this->session_restore();
 					 return true;} else { $this->cookie_delete();}} return false; } return true; }
@@ -269,7 +269,11 @@
 			// Session: Check if Valid
 			private function session_valid($key, $userid) {
 			$r = mysqli_query($this->mysqlcon, "SELECT * FROM ".$this->table_sessions." WHERE is_active = '1' AND session_key = '".mysqli_real_escape_string($this->mysqlcon, $key)."' AND key_type = '".$this->key_session."' AND user_id = '".mysqli_real_escape_string($this->mysqlcon, $userid)."'");
-			if(mysqli_fetch_array($r)){ return true;} else {return false;}}	
+			if($f = mysqli_fetch_array($r)){ 
+				if(is_numeric($this->dbsession_max_use_days)) { if(isset($f["use_date"])) { if (strtotime($f["use_date"]) < strtotime('-'.$this->dbsession_max_use_days.' days')) {
+						$this->mysqlcon->query("UPDATE ".$this->table_sessions." SET is_active = 0 WHERE id = '".$f["id"]."'"); return false;}}}			
+			$this->mysqlcon->query("UPDATE ".$this->table_sessions." SET use_date = CURRENT_TIMESTAMP() WHERE id = '".$f["id"]."'"); return true;
+			} else {return false;}}	
 	
 		// Constructor of the Control Class
 			function __construct($mysqlcon, $table_users, $table_sessions, $preecokie = "x_users_") {
@@ -406,7 +410,11 @@
 			// Check if a Rec or Activation Token is Valid
 			public function rec_token_check($key, $userid) {
 				$r = mysqli_query($this->mysqlcon, "SELECT * FROM ".$this->table_sessions." WHERE is_active = '1' AND session_key = '".mysqli_real_escape_string($this->mysqlcon, $key)."' AND key_type = '".$this->key_recover."' AND user_id = '".mysqli_real_escape_string($this->mysqlcon, $userid)."'");
-				if(mysqli_num_rows($r)!=0){return true;} else {return false;}}			
+				if(mysqli_num_rows($r)!=0){
+					
+					return true;
+				
+				} else {return false;}}			
 			// Reset Request Preparation for Admins
 			public function rec_request_by_id($ref) {
 				$r = mysqli_query($this->mysqlcon, "SELECT * FROM ".$this->table_users."  WHERE id = \"".mysqli_real_escape_string($this->mysqlcon, $ref)."\"");
@@ -439,7 +447,9 @@
 				$r = mysqli_query($this->mysqlcon, "SELECT * FROM ".$this->table_users."  WHERE LOWER(".$this->relevant_reference_username.") = \"".mysqli_real_escape_string($this->mysqlcon, strtolower(trim($ref)))."\"");
 				while($f=mysqli_fetch_array($r)){
 					// Check if Expired Code 3
-					if(is_numeric($this->recover_intervall_hours)) {if(isset($f["reset_date"])) {if (strtotime($f["reset_date"]) > strtotime('-'.$this->recover_intervall_hours.' hours')) {$this->rec_request_code	=	3;return false;}}}
+					if(is_numeric($this->recover_intervall_hours)) {if(isset($f["reset_date"])) { if (strtotime($f["reset_date"]) > strtotime('-'.$this->recover_intervall_hours.' hours')) {$this->rec_request_code	=	3;return false;}}}
+					
+					$this->mysqlcon->query("UPDATE ".$this->table_users." SET reset_date = CURRENT_TIMESTAMP WHERE id = '".$f["id"]."'");
 					// Tokens
 					$new_token	=	$this->genKey(10, "123456789");
 					$this->resetFailure();
@@ -473,7 +483,6 @@
 					
 					// Update Reset Date if First Activation
 						$this->mysqlcon->query("UPDATE ".$this->table_users." SET activation_date = CURRENT_TIMESTAMP() WHERE id = '".$userid."' AND activation_date IS NULL");
-						$this->mysqlcon->query("UPDATE ".$this->table_users." SET reset_date = CURRENT_TIMESTAMP() WHERE id = '".$userid."'");
 						$this->mysqlcon->query("UPDATE ".$this->table_users." SET is_confirmed = 1 WHERE id = '".$userid."'");
 					// Update to new Password
 						$this->changeUserPass($f["user_id"], $newpass);
