@@ -1,7 +1,6 @@
 <?php
 	// Configurations Include
 		require_once(dirname(__FILE__) ."/../settings.php");
-	
 		$all_domains = array();
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//// Fetch Entries from Cached File Names		

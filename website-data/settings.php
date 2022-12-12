@@ -5,12 +5,12 @@
 		 |    |  _/  |  \/ ___\   __\|  |/  ___/  |  \ 
 		 |    |   \  |  / /_/  >  |  |  |\___ \|   Y  \
 		 |______  /____/\___  /|__|  |__/____  >___|  /
-				\/     /_____/               \/     \/  MRoD Configuration File */
+				\/     /_____/               \/     \/  DNSHTTP Configuration File */
 		#####################################################################
 		##### Site Setup       ##############################################				
 		define("_TITLE_", 				""); # A Imaginary Server Name to show at Title	 		
 		define("_COOKIES_",     		"dnshttp_"); # Cookie Prefix			
-		define("_MAIN_PATH_",			"/home/bugfish/domains/int-dns.bugfish.eu/public_html/"); # MAIN PATH
+		define("_MAIN_PATH_",			"/var/www/html/dnshttp/"); # MAIN PATH
 
 		#####################################################################
 		##### Security Setup   ##############################################		
