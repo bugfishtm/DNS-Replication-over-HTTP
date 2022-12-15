@@ -2,6 +2,7 @@
 
 
 
+
 # DNS Replication over HTTP
 This script can make your Master DNS Replicate to Slave DNS Servers just over HTTP/HTTPS without the need to open additional Ports or having trouble with bind9 Domain Configuration. This Panel comes with an API which makes it possible to share all needed Informations via HTTP and so have better Control over Large Replication Systems (for example for huge hosting infrastructure)
 
@@ -84,7 +85,7 @@ Resets the IP Blacklist for Login - This is an Anti BruteForce Feature
 	};
 
 ## Issues
-If you encounter issues or have questions using this software, do not hesitate write us at contact@bugfish.eu or take a look at bugfish.eu!
+If you encounter issues or have questions using this software, do not hesitate write us at our Forum on www.bugfish.eu !
 
 ## Default Login for Webinterface
 Username: admin  
